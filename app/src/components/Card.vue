@@ -5,10 +5,10 @@
         class="card_box"
         v-for="(user, index) in users.slice(0, 21)"
         :key="user.id"
-        @click="goToDetailPage(user)"
       >
-        <img :src="user.url" alt="" />
+        <img @click="goToDetailPage(user)" :src="user.url" alt="" />
         <p>{{ user.title }}</p>
+        <button @click="addToCart(user)">Add to Cart</button>
       </div>
     </div>
   </div>
@@ -40,6 +40,9 @@ export default {
         params: { userId: user.id },
         query: { title: user.title, image: user.url }
       });
+    },
+    addToCart(user) {
+      this.$store.commit("addToCart", user);
     }
   }
 };
@@ -57,8 +60,8 @@ export default {
 }
 .card_box {
   border: 1px dashed red;
-  width: 300px;
-  height: 300px;
+  width: 500px;
+  height: 500px;
   cursor: pointer;
   padding: 20px;
   display: flex;
@@ -68,8 +71,8 @@ export default {
   flex-direction: column;
 }
 .card_box img {
-  width: 80%;
-  height: 80%;
+  width: 50%;
+  height: 50%;
   border-radius: 100%;
   object-fit: cover;
 }
